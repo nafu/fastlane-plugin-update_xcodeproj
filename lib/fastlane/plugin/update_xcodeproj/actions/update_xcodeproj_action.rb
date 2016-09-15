@@ -37,7 +37,7 @@ module Fastlane
                                        env_name: "UPDATE_XCODEPROJ_XCODEPROJ",
                                        description: "Path to your Xcode project",
                                        optional: true,
-                                       default_value: DIR['*.xcodeproj'].first,
+                                       default_value: Dir['*.xcodeproj'].first,
                                        type: String,
                                        verify_block: proc do |value|
                                          UI.user_error!("Please pass the path to the project, not the workspace") unless value.end_with?(".xcodeproj")
