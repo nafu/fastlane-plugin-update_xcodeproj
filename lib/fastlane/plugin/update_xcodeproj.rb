@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'fastlane/plugin/update_xcodeproj/version'
 
 module Fastlane
