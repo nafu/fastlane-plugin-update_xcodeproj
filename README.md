@@ -21,6 +21,10 @@ update_xcodeproj(
 )
 ```
 
+- Inspired
+  - [update_app_identifier](https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/update_app_identifier.rb)
+  - [update_info_plist](https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/update_info_plist.rb)
+
 ## Example
 
 Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`. 
