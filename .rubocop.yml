@@ -134,6 +134,7 @@ Style/SpaceAroundOperators:
     - '**/spec/actions_specs/xcodebuild_spec.rb'
 
 AllCops:
+  TargetRubyVersion: 2.3
   Include:
     - '**/fastlane/Fastfile'
   Exclude:
