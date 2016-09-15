@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = %q{nakamurafumiya003@gmail.com}
 
   spec.summary       = %q{Update Xcode projects}
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-update_xcodeproj"
+  spec.homepage      = "https://github.com/nafu/fastlane-plugin-update_xcodeproj"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
