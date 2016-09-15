@@ -36,7 +36,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :xcodeproj,
                                        env_name: "UPDATE_XCODEPROJ_XCODEPROJ",
                                        description: "Path to your Xcode project",
-                                       optional: false,
+                                       optional: true,
                                        default_value: DIR['*.xcodeproj'].first,
                                        type: String,
                                        verify_block: proc do |value|
