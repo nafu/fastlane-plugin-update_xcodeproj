@@ -11,7 +11,7 @@ module Fastlane
 
         options.each do |key, value|
           configs = project.objects.select { |obj| obj.isa == 'XCBuildConfiguration' && !obj.build_settings[key.to_s].nil? }
-          UI.user_error!("Info plist uses $(#{value}), but xcodeproj does not") unless configs.count.positive?
+          UI.user_error!("Xcodeproj does not use #{key}") if configs.count.zero?
 
           configs.each do |c|
             c.build_settings[key.to_s] = value
