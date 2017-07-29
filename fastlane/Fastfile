@@ -1,5 +1,16 @@
 # frozen_string_literal: true
 
 lane :test do
-  update_xcodeproj
+  update_xcodeproj(
+    xcodeproj: 'examples/fastlane-plugin-update_xcodeproj.xcodeproj', # Optional path to xcodeproj, will use first .xcodeproj if not set
+    options: { 'IPHONEOS_DEPLOYMENT_TARGET' => 9.3 } # Key & Value pair to update xcode project
+  )
+
+  update_xcodeproj(
+    xcodeproj: 'examples/fastlane-plugin-update_xcodeproj.xcodeproj',
+    options: {
+      'PRODUCT_BUNDLE_IDENTIFIER' => 'tools.fastlane.bundle',
+      'PRODUCT_NAME' => 'Fastlane Plugin'
+    }
+  )
 end
