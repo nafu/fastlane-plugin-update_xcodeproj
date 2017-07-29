@@ -38,6 +38,21 @@ describe Fastlane::Actions::UpdateXcodeprojAction do
       expect(stub_settings[identifier_key]).to eq(app_identifier)
     end
 
+    it "presents an error when the key does not exist" do
+      stub_project = 'stub project'
+      stub_object = ['object']
+
+      allow(Xcodeproj::Project).to receive(:open).with('./tmp/fastlane/tests/fastlane/bundle.xcodeproj').and_return(stub_project)
+      allow(stub_project).to receive(:objects).and_return(stub_object)
+      allow(stub_object).to receive(:select).and_return([])
+      allow(stub_project).to receive(:save)
+
+      expect(Fastlane::UI).to receive(:user_error!).with(/Xcodeproj does not use KEY_DOES_NOT_EXIST/)
+
+      options = { 'KEY_DOES_NOT_EXIST' => 'new value' }
+      Fastlane::Actions::UpdateXcodeprojAction.run(xcodeproj: xcodeproj, options: options)
+    end
+
     after do
       FileUtils.rm_r(test_path)
     end
