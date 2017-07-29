@@ -55,7 +55,7 @@ describe Fastlane::Actions::UpdateXcodeprojAction do
 
       options = {
         identifier_key => app_identifier,
-        second_key => second_value,
+        second_key => second_value
       }
       Fastlane::Actions::UpdateXcodeprojAction.run(xcodeproj: xcodeproj, options: options)
 
@@ -99,7 +99,7 @@ describe Fastlane::Actions::UpdateXcodeprojAction do
 
       options = {
         identifier_key => app_identifier,
-        second_key => second_value,
+        second_key => second_value
       }
       Fastlane::Actions::UpdateXcodeprojAction.run(xcodeproj: xcodeproj, options: options)
     end
