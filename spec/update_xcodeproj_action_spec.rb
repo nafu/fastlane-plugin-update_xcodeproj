@@ -26,13 +26,13 @@ describe Fastlane::Actions::UpdateXcodeprojAction do
       stub_object = ['object']
       stub_settings = Hash[identifier_key, 'tools.fastlane.bundle']
 
-      allow(Xcodeproj::Project).to receive(:open).with('./tmp/fastlane/tests/fastlane/bundle.xcodeproj').and_return(stub_project)
+      allow(Xcodeproj::Project).to receive(:open).with(xcodeproj).and_return(stub_project)
       allow(stub_project).to receive(:objects).and_return(stub_object)
       allow(stub_object).to receive(:select).and_return([stub_configuration])
       allow(stub_configuration).to receive(:build_settings).and_return(stub_settings)
       allow(stub_project).to receive(:save)
 
-      options = { 'PRODUCT_BUNDLE_IDENTIFIER' => 'com.test.plist' }
+      options = { identifier_key => app_identifier }
       Fastlane::Actions::UpdateXcodeprojAction.run(xcodeproj: xcodeproj, options: options)
 
       expect(stub_settings[identifier_key]).to eq(app_identifier)
@@ -42,7 +42,7 @@ describe Fastlane::Actions::UpdateXcodeprojAction do
       stub_project = 'stub project'
       stub_object = ['object']
 
-      allow(Xcodeproj::Project).to receive(:open).with('./tmp/fastlane/tests/fastlane/bundle.xcodeproj').and_return(stub_project)
+      allow(Xcodeproj::Project).to receive(:open).with(xcodeproj).and_return(stub_project)
       allow(stub_project).to receive(:objects).and_return(stub_object)
       allow(stub_object).to receive(:select).and_return([])
       allow(stub_project).to receive(:save)
