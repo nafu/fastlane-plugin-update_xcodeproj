@@ -1,4 +1,5 @@
 # frozen_string_literal: false
+
 require 'xcodeproj'
 include Xcodeproj
 
@@ -31,7 +32,7 @@ describe Fastlane::Actions::UpdateXcodeprojAction do
       expect(stub_configuration).to receive(:build_settings).and_return(stub_settings)
       expect(stub_project).to receive(:save)
 
-      options = { 'PRODUCT_BUNDLE_IDENTIFIER': 'com.test.plist' }
+      options = { 'PRODUCT_BUNDLE_IDENTIFIER' => 'com.test.plist' }
       Fastlane::Actions::UpdateXcodeprojAction.run(xcodeproj: xcodeproj, options: options)
 
       expect(stub_settings[identifier_key]).to eq(app_identifier)
