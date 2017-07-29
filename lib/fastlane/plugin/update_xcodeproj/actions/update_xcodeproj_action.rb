@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Fastlane
   module Actions
     class UpdateXcodeprojAction < Action

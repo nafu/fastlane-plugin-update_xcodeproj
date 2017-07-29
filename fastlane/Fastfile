@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 lane :test do
   update_xcodeproj
 end
