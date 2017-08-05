@@ -23,7 +23,7 @@ Update Xcode projects
 
 ```ruby
 update_xcodeproj(
-  xcodeproj: 'Example.xcodepoj', # Optional path to xcodeproj, will use first .xcodeproj if not set
+  xcodeproj: 'Example.xcodeproj', # Optional path to xcodeproj, will use first .xcodeproj if not set
   options: {'VARIABLE_YOUR_WANT_TO_CHANGE': 'new value'} # Key & Value pair to update xcode project
 )
 ```
