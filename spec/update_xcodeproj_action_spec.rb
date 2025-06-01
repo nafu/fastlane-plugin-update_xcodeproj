@@ -103,5 +103,56 @@ describe Fastlane::Actions::UpdateXcodeprojAction do
       }
       Fastlane::Actions::UpdateXcodeprojAction.run(xcodeproj: xcodeproj, options: options)
     end
+
+    it 'updates only the specified configuration when configuration parameter is provided' do
+      stub_project = 'stub project'
+      debug_config = double('debug_config')
+      release_config = double('release_config')
+      stub_object = [debug_config, release_config]
+      debug_settings = Hash[identifier_key, 'tools.fastlane.bundle.debug']
+      release_settings = Hash[identifier_key, 'tools.fastlane.bundle.release']
+
+      allow(Xcodeproj::Project).to receive(:open).with(xcodeproj).and_return(stub_project)
+      allow(stub_project).to receive(:objects).and_return(stub_object)
+      allow(stub_project).to receive(:save)
+
+      # Set up debug config
+      allow(debug_config).to receive(:isa).and_return('XCBuildConfiguration')
+      allow(debug_config).to receive(:name).and_return('Debug')
+      allow(debug_config).to receive(:build_settings).and_return(debug_settings)
+      
+      # Set up release config
+      allow(release_config).to receive(:isa).and_return('XCBuildConfiguration')
+      allow(release_config).to receive(:name).and_return('Release')
+      allow(release_config).to receive(:build_settings).and_return(release_settings)
+
+      options = { identifier_key => app_identifier }
+      Fastlane::Actions::UpdateXcodeprojAction.run(xcodeproj: xcodeproj, options: options, configuration: 'Debug')
+
+      # Only debug config should be updated
+      expect(debug_settings[identifier_key]).to eq(app_identifier)
+      expect(release_settings[identifier_key]).to eq('tools.fastlane.bundle.release') # unchanged
+    end
+
+    it 'presents an error when specified configuration is not found' do
+      stub_project = 'stub project'
+      debug_config = double('debug_config')
+      stub_object = [debug_config]
+      debug_settings = Hash[identifier_key, 'tools.fastlane.bundle.debug']
+
+      allow(Xcodeproj::Project).to receive(:open).with(xcodeproj).and_return(stub_project)
+      allow(stub_project).to receive(:objects).and_return(stub_object)
+      allow(stub_project).to receive(:save)
+
+      # Set up debug config only
+      allow(debug_config).to receive(:isa).and_return('XCBuildConfiguration')
+      allow(debug_config).to receive(:name).and_return('Debug')
+      allow(debug_config).to receive(:build_settings).and_return(debug_settings)
+
+      expect(Fastlane::UI).to receive(:user_error!).with(/Configuration 'NonExistent' not found in project/)
+
+      options = { identifier_key => app_identifier }
+      Fastlane::Actions::UpdateXcodeprojAction.run(xcodeproj: xcodeproj, options: options, configuration: 'NonExistent')
+    end
   end
 end

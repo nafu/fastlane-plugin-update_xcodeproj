@@ -28,6 +28,29 @@ update_xcodeproj(
 )
 ```
 
+### Configuration Filtering
+
+You can also specify which build configuration to update (e.g., Debug, Release):
+
+```ruby
+# Update all configurations (default behavior)
+update_xcodeproj(
+  options: {'PRODUCT_BUNDLE_IDENTIFIER': 'com.example.app'}
+)
+
+# Update only Debug configuration
+update_xcodeproj(
+  options: {'DEBUG_INFORMATION_FORMAT': 'dwarf-with-dsym'},
+  configuration: 'Debug'
+)
+
+# Update only Release configuration
+update_xcodeproj(
+  options: {'SWIFT_OPTIMIZATION_LEVEL': '-O'},
+  configuration: 'Release'
+)
+```
+
 - Inspired
   - [update_app_identifier](https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/update_app_identifier.rb)
   - [update_info_plist](https://github.com/fastlane/fastlane/blob/master/fastlane/lib/fastlane/actions/update_info_plist.rb)

@@ -13,4 +13,18 @@ lane :test do
       'PRODUCT_NAME' => 'Fastlane Plugin'
     }
   )
+
+  # Update only Debug configuration
+  update_xcodeproj(
+    xcodeproj: 'examples/fastlane-plugin-update_xcodeproj.xcodeproj',
+    options: { 'DEBUG_INFORMATION_FORMAT' => 'dwarf-with-dsym' },
+    configuration: 'Debug'
+  )
+
+  # Update only Release configuration
+  update_xcodeproj(
+    xcodeproj: 'examples/fastlane-plugin-update_xcodeproj.xcodeproj',
+    options: { 'SWIFT_OPTIMIZATION_LEVEL' => '-O' },
+    configuration: 'Release'
+  )
 end
